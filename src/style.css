@@ -1,117 +1,99 @@
 :root {
-  color-scheme: dark;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #07101d;
-  color: #eaf3ff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #252b30;
+  background: #f5f5f2;
   font-synthesis: none;
+  --border: #d6d9d8;
+  --muted: #606a70;
+  --accent: #285c70;
 }
-
 * { box-sizing: border-box; }
-html, body, #app { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+html, body, #app { width: 100%; height: 100%; margin: 0; }
+body { overflow: hidden; }
 button, input, select, textarea { font: inherit; }
 button { cursor: pointer; }
-
-#app { display: grid; grid-template-columns: minmax(320px, 390px) 1fr; }
-.panel {
-  height: 100%; overflow-y: auto; padding: 22px 20px 40px;
-  background: linear-gradient(180deg, rgba(13, 28, 48, .98), rgba(7, 16, 29, .98));
-  border-right: 1px solid rgba(148, 188, 229, .13);
-  scrollbar-width: thin;
-}
-.hero { padding: 4px 3px 12px; }
-.eyebrow { color: #73dcff; font-size: 11px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
-h1 { margin: 5px 0 6px; font-size: 27px; letter-spacing: -.03em; }
-.hero p, .hint, .scope-help p { color: #90a9c3; line-height: 1.45; }
-.hero p { margin: 0; font-size: 13px; }
-
-section, details { border-top: 1px solid rgba(148, 188, 229, .1); padding: 16px 2px; }
-.section-title, summary { font-size: 12px; font-weight: 750; color: #cfe3fb; margin-bottom: 10px; letter-spacing: .02em; }
-summary { cursor: pointer; }
-.details-body { margin-top: 10px; }
-.hint { margin: 9px 2px 0; font-size: 11.5px; }
-
-.segmented { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 4px; border-radius: 10px; background: #091524; }
-.segmented button, .transport button, .button-row button {
-  border: 1px solid rgba(136, 182, 226, .16); color: #a9bfd8; background: #0f2035;
-  padding: 8px 10px; border-radius: 7px;
-}
-.segmented button.active { color: #f3fbff; background: #173a59; border-color: #3c82ab; box-shadow: inset 0 0 0 1px rgba(92, 202, 255, .1); }
-
-.slider-row { display: grid; grid-template-columns: 64px 1fr 64px; align-items: center; gap: 8px; margin: 8px 0; }
-.slider-label { color: #9db3cb; font-size: 12px; }
-.slider-row output { text-align: right; color: #dcecff; font-size: 11px; font-variant-numeric: tabular-nums; }
-input[type="range"] { width: 100%; accent-color: #63d7ff; }
-.formula { font-family: "SFMono-Regular", Consolas, monospace; color: #74ddff; background: #08131f; border: 1px solid rgba(101, 211, 255, .12); border-radius: 7px; }
-.formula.compact { padding: 7px 9px; font-size: 11px; margin-top: 8px; }
-
-.transport { display: flex; align-items: center; gap: 7px; margin-top: 10px; }
-.transport button { padding: 7px 11px; }
-.speed { margin-left: auto; color: #89a5c1; font-size: 11px; }
-select { margin-left: 4px; color: #e8f2ff; background: #0d2034; border: 1px solid #25445f; border-radius: 6px; padding: 5px; }
-
-.equation-section textarea {
-  width: 100%; min-height: 220px; resize: vertical; padding: 11px 12px; border-radius: 9px;
-  color: #d9eeff; background: #050d17; border: 1px solid #203b55; outline: none;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 11px; line-height: 1.55;
-}
-.equation-section textarea:focus { border-color: #3f98c5; box-shadow: 0 0 0 2px rgba(63, 152, 197, .12); }
-.button-row { display: flex; gap: 7px; margin-top: 8px; }
-.button-row .primary { color: #07101d; background: #77ddff; border-color: #77ddff; font-weight: 750; }
-.status { font-size: 10.5px; line-height: 1.45; margin-top: 8px; padding: 7px 8px; border-radius: 6px; }
-.status.ok { color: #8fe3bf; background: rgba(48, 155, 113, .1); }
-.status.error { color: #ff9a9a; background: rgba(214, 68, 68, .1); white-space: pre-wrap; }
-.scope-help { border-top: 0; padding: 9px 0 0; }
-.scope-help summary { color: #8daac5; font-size: 11px; margin: 0; }
-.scope-help p { font-size: 10.5px; }
-
-.stage { position: relative; min-width: 0; height: 100%; background: radial-gradient(circle at 60% 35%, #112944, #07101d 55%); }
-#viewport { position: absolute; inset: 0; }
+button, select { min-height: 34px; border: 1px solid #bfc6c8; border-radius: 3px; background: #fff; color: #303a40; padding: 6px 10px; font-size: 12px; }
+button:hover { background: #e9eeef; border-color: #80969f; }
+button:active { background: #dce5e8; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#app { display: grid; grid-template-columns: 410px minmax(0, 1fr); }
+.panel { height: 100%; overflow-y: auto; padding: 26px 24px 32px; background: #f5f5f2; border-right: 1px solid var(--border); scrollbar-width: thin; }
+.hero { padding-bottom: 24px; }
+.eyebrow { color: var(--muted); font-size: 11px; letter-spacing: .06em; }
+h1 { margin: 10px 0 10px; font-family: Georgia, "Times New Roman", serif; font-size: 29px; font-weight: 400; letter-spacing: -.025em; }
+.hero p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+section, details { border-top: 1px solid var(--border); padding: 20px 0; }
+.section-title, summary { font-size: 13px; font-weight: 600; color: #252b30; }
+.section-title { margin-bottom: 12px; }
+summary { cursor: pointer; line-height: 1.5; }
+summary::marker { color: #77868d; }
+.details-body { margin-top: 16px; }
+.hint, .scope-help p { margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.hint code { color: #334e5c; font-size: 11px; }
+.equation-label { display: block; margin-bottom: 0; }
+.equation-presets { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 7px; margin: 16px 0; }
+.equation-presets label { grid-column: 1 / -1; color: var(--muted); font-size: 11px; }
+.equation-presets select { min-width: 0; width: 100%; }
+.equation-toolbar { display: flex; flex-wrap: wrap; gap: 5px; padding: 10px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.equation-toolbar button { min-height: 30px; padding: 4px 8px; background: transparent; border-color: transparent; }
+.equation-toolbar button:hover { background: #e5e9e8; border-color: #c5cdcf; }
+.equation-prefix { font: italic 18px Georgia, serif; margin: 16px 0 9px; color: #334e5c; }
+.equation-section textarea { display: block; width: 100%; min-height: 225px; resize: vertical; padding: 12px; border: 1px solid #bfc6c8; border-radius: 3px; background: #fff; color: #24343d; font: 12px/1.65 "SFMono-Regular", Consolas, monospace; tab-size: 2; }
+.button-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.button-row .primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.button-row .primary:hover { background: #20495a; }
+.status { margin-top: 12px; border-left: 2px solid; padding: 3px 0 3px 10px; font-size: 11px; line-height: 1.6; }
+.status.ok { color: #386349; }
+.status.draft { color: #856019; }
+.status.error { color: #a33232; white-space: pre-wrap; }
+.scope-help { border: 0; padding: 15px 0 0; }
+.scope-help summary { color: var(--muted); font-size: 12px; font-weight: 400; }
+.scope-help p { overflow-wrap: anywhere; }
+.segmented { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.segmented button { border-radius: 0; }
+.segmented button + button { border-left: 0; }
+.segmented button.active { background: #e1eaee; color: #20495a; box-shadow: inset 0 -2px var(--accent); font-weight: 600; }
+.phase-toggle { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 12px; line-height: 1.5; }
+.phase-toggle input { accent-color: var(--accent); }
+.phase-toggle:has(input:disabled) { color: #757d80; }
+.slider-row { display: grid; grid-template-columns: 65px minmax(0, 1fr) 60px; align-items: center; gap: 8px; margin: 12px 0; }
+.slider-label { font-size: 12px; color: #49565d; }
+.slider-row output { text-align: right; font: 11px "SFMono-Regular", Consolas, monospace; color: #334e5c; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.formula.compact { margin-top: 12px; padding: 9px; background: #e9edeb; color: #405a64; font: 11px "SFMono-Regular", Consolas, monospace; }
+.transport { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.speed { margin-left: auto; font-size: 12px; color: var(--muted); }
+.speed select { margin-left: 4px; }
+/* Reserve distinct rows for the scene header and readouts; overlays never compete. */
+.stage { position: relative; min-width: 0; height: 100%; display: grid; grid-template-rows: 58px minmax(0, 1fr) auto auto; background: #07101d; color: #d9e1e6; }
+#viewport { position: relative; grid-row: 2; min-height: 0; overflow: hidden; }
 #viewport canvas { display: block; width: 100%; height: 100%; }
-.topbar { position: absolute; top: 18px; left: 20px; right: 20px; display: flex; align-items: center; gap: 8px; pointer-events: none; }
-.badge, .equation-chip { background: rgba(5, 13, 24, .72); backdrop-filter: blur(12px); border: 1px solid rgba(137, 196, 235, .17); border-radius: 999px; padding: 7px 10px; }
-.badge { color: #7be0ff; font-size: 10px; font-weight: 800; letter-spacing: .11em; }
-.equation-chip { color: #b4c9de; font: 11px "SFMono-Regular", Consolas, monospace; }
-
-.legend { position: absolute; top: 62px; left: 20px; display: flex; flex-direction: column; gap: 6px; color: #8ea7c0; font-size: 10.5px; pointer-events: none; }
-.legend span { display: flex; align-items: center; gap: 6px; }
-.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-.dot.phase { background: linear-gradient(135deg, #6bf, #f7a); }
-.dot.density { background: #9de7ff; box-shadow: 0 0 8px #9de7ff; }
-
-.observables {
-  position: absolute; right: 18px; top: 18px; width: min(280px, 34vw); padding: 11px 12px;
-  display: grid; gap: 6px; background: rgba(5, 13, 24, .72); backdrop-filter: blur(12px);
-  border: 1px solid rgba(137, 196, 235, .15); border-radius: 11px; pointer-events: none;
-}
-.observables div { display: grid; grid-template-columns: 58px 1fr; gap: 7px; }
-.observables span { color: #7895b3; font-size: 10px; }
-.observables strong { color: #e7f3ff; text-align: right; font: 10.5px "SFMono-Regular", Consolas, monospace; font-weight: 500; }
-.axis-note { position: absolute; left: 20px; bottom: 16px; color: #7791aa; font-size: 10.5px; background: rgba(5, 13, 24, .62); border-radius: 7px; padding: 7px 9px; pointer-events: none; }
-
-@media (max-width: 860px) {
-  html, body, #app { overflow: auto; }
-  #app { display: block; }
-  .panel { height: auto; max-height: none; border-right: 0; }
-  .stage { height: 70vh; min-height: 520px; }
-  .observables { width: 260px; }
-}
-
-.phase-toggle { display: flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 12px; color: #cfe3fb; }
-.phase-toggle input { accent-color: #61e7ff; }
-.phase-toggle:has(input:disabled) { opacity: .45; }
+.topbar { grid-row: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 12px 24px; border-bottom: 1px solid #27313a; }
+.badge { font-size: 11px; font-weight: 600; letter-spacing: .08em; color: #c2cdd4; }
+.equation-chip { color: #98a9b4; font: 12px "SFMono-Regular", Consolas, monospace; margin-left: auto; }
+.legend { position: absolute; top: 80px; left: 24px; right: 24px; display: flex; flex-wrap: wrap; gap: 8px 18px; color: #a6b5c0; font-size: 11px; line-height: 1.5; pointer-events: none; }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.dot { width: 6px; height: 6px; flex-shrink: 0; border-radius: 50%; display: inline-block; }
 .dot.mean { background: white; }
+.dot.density { background: #61e7ff; }
 .dot.outer { background: #408dff; }
-.phase-ramp { width: 180px; height: 9px; margin: 5px 0; border-radius: 5px; background: linear-gradient(to right, rgb(10,194,194), rgb(133,239,26), rgb(255,71,71), rgb(133,26,239), rgb(10,194,194)); }
-.legend { max-width: calc(100% - 330px); }
-@media (max-width: 1100px) { .legend { top: auto; bottom: 52px; max-width: calc(100% - 40px); } }
-
-.equation-label { display: block; }
-.equation-presets { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0; font-size: 11px; color: #a9bfd8; }
-.equation-presets select { min-width: 0; max-width: 100%; margin: 0; flex: 1; }
-.equation-toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
-.equation-toolbar button, .equation-presets button { border: 1px solid #2c536c; border-radius: 6px; padding: 7px 9px; background: #10283d; color: #c9edff; font-size: 12px; }
-.equation-toolbar button:hover, .equation-presets button:hover { background: #1d415c; }
-.equation-toolbar button:focus-visible, .equation-presets button:focus-visible { outline: 2px solid #77ddff; outline-offset: 2px; }
-.equation-prefix { color: #77ddff; font-family: Georgia, serif; font-size: 18px; margin: 12px 0 8px; }
-.hint code { color: #bddff6; }
-.status.draft { color: #ffdc96; background: rgba(222, 159, 40, .1); }
+.phase-ramp { width: 180px; height: 6px; margin: 4px 0; background: linear-gradient(to right, rgb(10,194,194), rgb(133,239,26), rgb(255,71,71), rgb(133,26,239), rgb(10,194,194)); }
+.observables { grid-row: 3; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 20px; padding: 18px 24px; border-top: 1px solid #27313a; background: #101923; pointer-events: none; }
+.observables div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.observables span { font-size: 11px; color: #93a5b3; }
+.observables strong { font: 11px/1.5 "SFMono-Regular", Consolas, monospace; color: #e0e8ed; overflow-wrap: anywhere; }
+.axis-note { grid-row: 4; z-index: 1; color: #93a5b3; font-size: 10px; line-height: 1.7; padding: 10px 24px; border-top: 1px solid #27313a; background: #101923; pointer-events: none; }
+@media (max-width: 1100px) and (min-width: 761px) {
+  #app { grid-template-columns: 360px minmax(0, 1fr); }
+  .panel { padding: 24px 18px; }
+  .observables { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; }
+}
+@media (max-width: 760px) {
+  body { overflow: auto; }
+  #app { display: flex; flex-direction: column; height: auto; }
+  .panel { height: auto; overflow: visible; padding: 24px 20px; border-right: 0; }
+  .stage { height: 780px; min-height: 780px; }
+  .observables { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; }
+  .legend { top: 76px; }
+  .topbar, .observables, .axis-note { padding-left: 20px; padding-right: 20px; }
+}

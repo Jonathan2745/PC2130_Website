@@ -215,6 +215,12 @@ function updateHUD(): void {
   const o = observablesAt(time, params);
   const g = gravityVector(params);
   must<HTMLElement>('view-description').textContent = viewDescriptions[view];
+  const axisDescriptions: Record<ViewMode, string> = {
+    position: 'Axes: red = x · green = y · blue = z (vertical). Position in model length units.',
+    momentum: 'Axes: red = pₓ · green = pᵧ · blue = p_z (vertical). Model momentum units.',
+    energy: 'Axes: red = K · green = V · blue = E (vertical). Centred, standardized diagnostic coordinates; display scale ×2.2.',
+  };
+  must<HTMLElement>('axis-description').textContent = axisDescriptions[view];
   must<HTMLElement>('view-badge').textContent = `${view.toUpperCase()} SPACE`;
   must<HTMLElement>('gravity-vector').textContent = `g = (${g.x.toFixed(2)}, ${g.y.toFixed(2)}, ${g.z.toFixed(2)})`;
   must<HTMLElement>('potential-chip').textContent = `V(r) = −m g·r`;

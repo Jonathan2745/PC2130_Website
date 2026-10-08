@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#08111f" />
     <title>3D Quantum Projectile Explorer</title>
-    <script type="module" crossorigin src="/assets/index-Bbcr9weV.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BdiLpTI4.css">
+    <script type="module" crossorigin src="/assets/index-DPBBJUeJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-B36X1eTa.css">
   </head>
   <body>
     <div id="app">
@@ -16,56 +16,6 @@
           <h1>Wavepacket Explorer</h1>
           <p>Interactive 3D Gaussian wavepacket under a uniform gravitational field.</p>
         </header>
-
-        <section>
-          <div class="section-title">Representation</div>
-          <div class="segmented" id="view-switcher">
-            <button data-view="position" class="active">Position</button>
-            <button data-view="momentum">Momentum</button>
-            <button data-view="energy">Energy</button>
-          </div>
-          <p class="hint" id="view-description"></p>
-          <label class="phase-toggle"><input type="checkbox" id="phase-colour" /> Colour surfaces by wavefunction phase</label>
-          <p class="hint" id="sampling-note"></p>
-        </section>
-
-        <section>
-          <div class="section-title">Initial center r₀</div>
-          <div id="center-controls"></div>
-        </section>
-
-        <section>
-          <div class="section-title">Initial average momentum p₀</div>
-          <div id="momentum-controls"></div>
-        </section>
-
-        <section>
-          <div class="section-title">Uniform gravity</div>
-          <div id="gravity-controls"></div>
-          <div class="formula compact" id="gravity-vector"></div>
-        </section>
-
-        <details>
-          <summary>Quantum parameters</summary>
-          <div id="quantum-controls" class="details-body"></div>
-        </details>
-
-        <section>
-          <div class="section-title">Time evolution</div>
-          <div id="time-control"></div>
-          <div class="transport">
-            <button id="play">Pause</button>
-            <button id="reset-time">Reset t</button>
-            <label class="speed">speed
-              <select id="speed">
-                <option value="0.25">0.25×</option>
-                <option value="0.5">0.5×</option>
-                <option value="1" selected>1×</option>
-                <option value="2">2×</option>
-              </select>
-            </label>
-          </div>
-        </section>
 
         <section class="equation-section">
           <label class="section-title equation-label" for="equation">Your wavefunction</label>
@@ -107,6 +57,64 @@
             <p>The editor directly controls the position-space visualization. The momentum and energy views remain analytic diagnostics for the Gaussian parameters; arbitrary edited ψ is not Fourier-transformed or numerically propagated.</p>
           </details>
         </section>
+
+        <section>
+          <div class="section-title">Representation</div>
+          <div class="segmented" id="view-switcher">
+            <button data-view="position" class="active">Position</button>
+            <button data-view="momentum">Momentum</button>
+            <button data-view="energy">Energy</button>
+          </div>
+          <p class="hint" id="view-description"></p>
+          <label class="phase-toggle"><input type="checkbox" id="phase-colour" /> Colour surfaces by wavefunction phase</label>
+          <p class="hint" id="sampling-note"></p>
+        </section>
+
+        <details>
+          <summary>Initial center r₀</summary>
+          <div class="details-body">
+          <div id="center-controls"></div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Initial average momentum p₀</summary>
+          <div class="details-body">
+          <div id="momentum-controls"></div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Uniform gravity</summary>
+          <div class="details-body">
+          <div id="gravity-controls"></div>
+          <div class="formula compact" id="gravity-vector"></div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Quantum parameters</summary>
+          <div id="quantum-controls" class="details-body"></div>
+        </details>
+
+        <section>
+          <div class="section-title">Time evolution</div>
+          <div id="time-control"></div>
+          <div class="transport">
+            <button id="play">Pause</button>
+            <button id="reset-time">Reset t</button>
+            <label class="speed">speed
+              <select id="speed">
+                <option value="0.25">0.25×</option>
+                <option value="0.5">0.5×</option>
+                <option value="1" selected>1×</option>
+                <option value="2">2×</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+
       </aside>
 
       <main class="stage">
@@ -122,7 +130,7 @@
           <div id="phase-legend" hidden><div class="phase-ramp"></div><span>−π &nbsp; &nbsp; &nbsp; phase arg ψ &nbsp; &nbsp; &nbsp; +π</span></div>
         </div>
         <div class="observables" id="observables"></div>
-        <div class="axis-note">Axes use x, y, z with <strong>z vertical</strong>. Drag to orbit · scroll to zoom · right-drag to pan.</div>
+        <div class="axis-note"><span id="axis-description"></span><br />Drag to orbit · scroll to zoom · right-drag to pan.</div>
       </main>
     </div>
   </body>

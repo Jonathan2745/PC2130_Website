@@ -33,6 +33,7 @@ export class QuantumVisualizer {
   private trajectory: THREE.Line;
   private momentumArrow: THREE.ArrowHelper;
   private grid: THREE.GridHelper;
+  private axisLabels: Record<ViewMode, THREE.Group>;
   private lastView: ViewMode = 'position';
   private lastTarget = new THREE.Vector3();
   constructor(mount: HTMLElement) {
@@ -53,6 +54,17 @@ export class QuantumVisualizer {
 
     const axes = new THREE.AxesHelper(4);
     this.scene.add(axes);
+    // Camera-facing labels sit at the positive ends of the fixed world axes.
+    // Build once, then switch visibility rather than recreating textures per frame.
+    this.axisLabels = {
+      position: this.makeAxisLabels(['x', 'y', 'z']),
+      momentum: this.makeAxisLabels(['pₓ', 'pᵧ', 'p_z']),
+      energy: this.makeAxisLabels(['K (std.)', 'V (std.)', 'E (std.)']),
+    };
+    for (const [view, group] of Object.entries(this.axisLabels)) {
+      group.visible = view === 'position';
+      this.scene.add(group);
+    }
 
     this.grid = new THREE.GridHelper(30, 30, 0x29435e, 0x182a3d);
     this.grid.rotation.x = Math.PI / 2;
@@ -86,6 +98,35 @@ export class QuantumVisualizer {
     resize();
   }
 
+  private makeAxisLabels(labels: string[]): THREE.Group {
+    const group = new THREE.Group();
+    const colours = ['#ff8070', '#90ee80', '#79b6ff'];
+    labels.forEach((label, axis) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 256;
+      canvas.height = 80;
+      const context = canvas.getContext('2d')!;
+      context.fillStyle = 'rgba(7, 16, 29, 0.85)';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.font = '600 34px system-ui, sans-serif';
+      context.textAlign = 'center';
+      context.textBaseline = 'middle';
+      context.fillStyle = colours[axis];
+      context.fillText(label, 128, 40);
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: texture, transparent: true, depthTest: false, depthWrite: false,
+        sizeAttenuation: false,
+      }));
+      sprite.position.setComponent(axis, 4.5);
+      sprite.scale.set(0.14, 0.044, 1);
+      sprite.renderOrder = 20;
+      group.add(sprite);
+    });
+    return group;
+  }
+
   render(): void {
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
@@ -95,6 +136,7 @@ export class QuantumVisualizer {
     if (view !== this.lastView) {
       this.reframe(view, t, params);
       this.lastView = view;
+      for (const [mode, group] of Object.entries(this.axisLabels)) group.visible = mode === view;
     }
 
     this.gravityArrow.visible = view === 'position';
