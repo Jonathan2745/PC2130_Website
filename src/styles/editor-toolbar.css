@@ -1,0 +1,12 @@
+/* EDITOR-TOOLBAR: presentation only; keep import order in style.css. */
+.equation-label { display: block; }
+.equation-presets { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0; font-size: 11px; color: #a9bfd8; }
+.equation-presets select { min-width: 0; max-width: 100%; margin: 0; flex: 1; }
+.equation-toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.equation-toolbar button, .equation-presets button { border: 1px solid #2c536c; border-radius: 6px; padding: 7px 9px; background: #10283d; color: #c9edff; font-size: 12px; }
+.equation-toolbar button:hover, .equation-presets button:hover { background: #1d415c; }
+.equation-toolbar button:focus-visible, .equation-presets button:focus-visible { outline: 2px solid #77ddff; outline-offset: 2px; }
+.equation-prefix { color: #77ddff; font-family: Georgia, serif; font-size: 18px; margin: 12px 0 8px; }
+.hint code { color: #bddff6; }
+.status.draft { color: #ffdc96; background: rgba(222, 159, 40, .1); }
+

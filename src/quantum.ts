@@ -1,3 +1,4 @@
+/** PHYSICS: analytic motion, widths and Gaussian expectation values. See CODE_GUIDE.md for editing locations. */
 export type Vec3 = { x: number; y: number; z: number };
 
 export interface QuantumParams {

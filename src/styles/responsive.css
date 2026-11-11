@@ -1,0 +1,9 @@
+/* RESPONSIVE: presentation only; keep import order in style.css. */
+@media (max-width: 860px) {
+  html, body, #app { overflow: auto; }
+  #app { display: block; }
+  .panel { height: auto; max-height: none; border-right: 0; }
+  .stage { height: 70vh; min-height: 520px; }
+  .observables { width: 260px; }
+}
+

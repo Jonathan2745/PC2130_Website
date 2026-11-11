@@ -1,0 +1,16 @@
+/* EQUATION: presentation only; keep import order in style.css. */
+.equation-section textarea {
+  width: 100%; min-height: 220px; resize: vertical; padding: 11px 12px; border-radius: 9px;
+  color: #d9eeff; background: #050d17; border: 1px solid #203b55; outline: none;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 11px; line-height: 1.55;
+}
+.equation-section textarea:focus { border-color: #3f98c5; box-shadow: 0 0 0 2px rgba(63, 152, 197, .12); }
+.button-row { display: flex; gap: 7px; margin-top: 8px; }
+.button-row .primary { color: #07101d; background: #77ddff; border-color: #77ddff; font-weight: 750; }
+.status { font-size: 10.5px; line-height: 1.45; margin-top: 8px; padding: 7px 8px; border-radius: 6px; }
+.status.ok { color: #8fe3bf; background: rgba(48, 155, 113, .1); }
+.status.error { color: #ff9a9a; background: rgba(214, 68, 68, .1); white-space: pre-wrap; }
+.scope-help { border-top: 0; padding: 9px 0 0; }
+.scope-help summary { color: #8daac5; font-size: 11px; margin: 0; }
+.scope-help p { font-size: 10.5px; }
+

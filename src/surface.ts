@@ -1,3 +1,4 @@
+/** GEOMETRY: convert sampled density into triangle surfaces. See CODE_GUIDE.md for editing locations. */
 import * as THREE from 'three';
 
 // Marching tetrahedra: interpolate the density crossing on each tetrahedron edge.

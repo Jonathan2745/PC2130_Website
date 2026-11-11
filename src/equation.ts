@@ -1,3 +1,4 @@
+/** WAVEFUNCTION: exact solution, expression compilation and density/phase evaluation. See CODE_GUIDE.md for editing locations. */
 import { compile, type EvalFunction } from 'mathjs';
 import { centerAt, gravityVector, momentumAt, sigmaAt, type QuantumParams } from './quantum';
 

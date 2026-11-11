@@ -8,6 +8,7 @@
   </head>
   <body>
     <div id="app">
+      <!-- CONTROL PANEL: section order and static labels. IDs connect to src/ui modules. -->
       <aside class="panel">
         <header class="hero">
           <div class="eyebrow">PC2130 · Quantum projectile</div>
@@ -68,7 +69,7 @@
           <p class="hint" id="sampling-note"></p>
         </section>
 
-        <details>
+        <details open>
           <summary>Initial center r₀</summary>
           <div class="details-body">
           <div id="center-controls"></div>
@@ -83,17 +84,19 @@
           </div>
         </details>
 
-        <details>
+        <details open>
           <summary>Initial average momentum p₀</summary>
           <div class="details-body">
           <div id="momentum-controls"></div>
           </div>
         </details>
 
-        <details>
-          <summary>Uniform gravity</summary>
+        <details open>
+          <summary>Uniform field components</summary>
           <div class="details-body">
-          <div id="gravity-controls"></div>
+          <div id="field-components"></div>
+          <p class="hint">Acceleration components gₓ, gᵧ, g_z. Force F = mg and potential V = −m(gₓx + gᵧy + g_z z). Default g = (0, 0, −1.2), giving V = +1.2mz in model units.</p>
+          <details><summary>Magnitude and direction</summary><div id="gravity-controls"></div></details>
           <div class="formula compact" id="gravity-vector"></div>
           </div>
         </details>
@@ -101,6 +104,15 @@
         <details>
           <summary>Quantum parameters</summary>
           <div id="quantum-controls" class="details-body"></div>
+        </details>
+
+        <details open>
+          <summary>Units and physical values</summary>
+          <p class="hint">Controls and the equation use model units. Choose the length and mass scales below to interpret them in SI. These reference scales do not identify a particular particle.</p>
+          <label class="velocity-row">L unit (m)<input id="length-unit" type="number" min="1e-30" step="any" value="0.000001" /></label>
+          <label class="velocity-row">M unit (kg)<input id="mass-unit" type="number" min="1e-40" step="any" value="1e-26" /></label>
+          <p class="hint">T = ML²/ℏphysical. At model ℏ = 1, the physical value is h/(2π), with h = 6.62607015 × 10⁻³⁴ J s. Changing the ℏ slider explores an effective multiplier, not a change to nature’s constant. Changing unit scales reinterprets all model values.</p>
+          <div id="physical-values" class="physical-values" aria-live="polite"></div>
         </details>
 
         <section>
@@ -123,6 +135,7 @@
 
       </aside>
 
+      <!-- SCENE: WebGL mount, legends and observable readouts. -->
       <main class="stage">
         <div id="viewport"></div>
         <div class="topbar">

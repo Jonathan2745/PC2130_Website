@@ -1,0 +1,10 @@
+/* LEGEND: presentation only; keep import order in style.css. */
+.phase-toggle { display: flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 12px; color: #cfe3fb; }
+.phase-toggle input { accent-color: #61e7ff; }
+.phase-toggle:has(input:disabled) { opacity: .45; }
+.dot.mean { background: white; }
+.dot.outer { background: #408dff; }
+.phase-ramp { width: 180px; height: 9px; margin: 5px 0; border-radius: 5px; background: linear-gradient(to right, rgb(10,194,194), rgb(133,239,26), rgb(255,71,71), rgb(133,26,239), rgb(10,194,194)); }
+.legend { max-width: calc(100% - 330px); }
+@media (max-width: 1100px) { .legend { top: auto; bottom: 52px; max-width: calc(100% - 40px); } }
+

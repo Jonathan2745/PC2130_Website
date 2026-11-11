@@ -1,3 +1,4 @@
+/** RENDERING: Three.js camera, meshes, axes and per-view geometry updates. See CODE_GUIDE.md for editing locations. */
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { densitySurface } from './surface';
