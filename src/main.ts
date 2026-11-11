@@ -8,7 +8,7 @@ const params: QuantumParams = {
   sigma: 0.65,
   hbar: 1,
   r0: { x: 0, y: 0, z: 4 },
-  p0: { x: 2.4, y: 0, z: 1.2 },
+  p0: { x: 0, y: 0, z: 0 },
   gravityMagnitude: 1.2,
   gravityAzimuthDeg: 0,
   gravityElevationDeg: -90,
@@ -44,6 +44,8 @@ interface SliderSpec {
   unit?: string;
 }
 
+const syncParameterControls: (() => void)[] = [];
+
 function slider(parentId: string, spec: SliderSpec): void {
   const parent = must<HTMLElement>(parentId);
   const row = document.createElement('label');
@@ -59,9 +61,17 @@ function slider(parentId: string, spec: SliderSpec): void {
   input.value = String(spec.get());
   const value = document.createElement('output');
   value.textContent = format(spec.get(), spec.unit);
+  syncParameterControls.push(() => {
+    const current = spec.get();
+    // Coupled velocity/momentum edits can exceed the original slider range.
+    input.min = String(Math.min(spec.min, current));
+    input.max = String(Math.max(spec.max, current));
+    input.value = String(current);
+    value.textContent = format(current, spec.unit);
+  });
   input.addEventListener('input', () => {
     spec.set(Number(input.value));
-    value.textContent = format(spec.get(), spec.unit);
+    syncParameterControls.forEach(sync => sync());
     forcePhysicsUpdate = true;
     updateHUD();
   });
@@ -79,6 +89,33 @@ slider('center-controls', { label: 'x₀', min: -10, max: 10, step: 0.1, get: ()
 slider('center-controls', { label: 'y₀', min: -10, max: 10, step: 0.1, get: () => params.r0.y, set: v => params.r0.y = v });
 slider('center-controls', { label: 'z₀', min: -10, max: 10, step: 0.1, get: () => params.r0.z, set: v => params.r0.z = v });
 
+// Velocity and momentum describe one initial state, linked by p₀ = m v₀.
+// Numeric velocity inputs permit exact zero and do not impose artificial bounds.
+for (const [axis, label] of [['x', 'vₓ₀'], ['y', 'vᵧ₀'], ['z', 'v_z₀']] as const) {
+  const row = document.createElement('label');
+  row.className = 'velocity-row';
+  const title = document.createElement('span');
+  title.textContent = label;
+  const input = document.createElement('input');
+  input.type = 'number';
+  input.step = 'any';
+  input.value = '0';
+  syncParameterControls.push(() => {
+    input.value = String(Number((params.p0[axis] / params.mass).toPrecision(12)));
+  });
+  input.addEventListener('change', () => {
+    const velocity = input.valueAsNumber;
+    if (Number.isFinite(velocity) && Number.isFinite(velocity * params.mass)) {
+      params.p0[axis] = params.mass * velocity;
+      forcePhysicsUpdate = true;
+      updateHUD();
+    }
+    syncParameterControls.forEach(sync => sync());
+  });
+  row.append(title, input);
+  must<HTMLElement>('velocity-controls').appendChild(row);
+}
+
 slider('momentum-controls', { label: 'pₓ₀', min: -10, max: 10, step: 0.1, get: () => params.p0.x, set: v => params.p0.x = v });
 slider('momentum-controls', { label: 'pᵧ₀', min: -10, max: 10, step: 0.1, get: () => params.p0.y, set: v => params.p0.y = v });
 slider('momentum-controls', { label: 'p𝓏₀', min: -10, max: 10, step: 0.1, get: () => params.p0.z, set: v => params.p0.z = v });
@@ -87,7 +124,14 @@ slider('gravity-controls', { label: '|g|', min: 0, max: 15, step: 0.05, get: () 
 slider('gravity-controls', { label: 'azimuth', min: -180, max: 180, step: 1, get: () => params.gravityAzimuthDeg, set: v => params.gravityAzimuthDeg = v, unit: '°' });
 slider('gravity-controls', { label: 'elevation', min: -90, max: 90, step: 1, get: () => params.gravityElevationDeg, set: v => params.gravityElevationDeg = v, unit: '°' });
 
-slider('quantum-controls', { label: 'mass m', min: 0.1, max: 5, step: 0.05, get: () => params.mass, set: v => params.mass = v });
+slider('quantum-controls', { label: 'mass m', min: 0.1, max: 5, step: 0.05, get: () => params.mass, set: v => {
+  // Preserve the selected launch velocity when mass changes.
+  const ratio = v / params.mass;
+  params.p0.x *= ratio;
+  params.p0.y *= ratio;
+  params.p0.z *= ratio;
+  params.mass = v;
+} });
 slider('quantum-controls', { label: 'σ₀', min: 0.15, max: 3, step: 0.05, get: () => params.sigma, set: v => params.sigma = v });
 slider('quantum-controls', { label: 'ℏ', min: 0.1, max: 3, step: 0.05, get: () => params.hbar, set: v => params.hbar = v });
 

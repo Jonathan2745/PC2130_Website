@@ -115,3 +115,7 @@ select { margin-left: 4px; color: #e8f2ff; background: #0d2034; border: 1px soli
 .equation-prefix { color: #77ddff; font-family: Georgia, serif; font-size: 18px; margin: 12px 0 8px; }
 .hint code { color: #bddff6; }
 .status.draft { color: #ffdc96; background: rgba(222, 159, 40, .1); }
+
+.velocity-row { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 8px; align-items: center; margin: 9px 0; color: #9db3cb; font-size: 12px; }
+.velocity-row input { width: 100%; min-width: 0; padding: 7px 9px; color: #e8f2ff; background: #0d2034; border: 1px solid #25445f; border-radius: 6px; }
+.velocity-row input:focus-visible { outline: 2px solid #77ddff; outline-offset: 2px; }
